@@ -14,9 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @Service
 public class CategoryService {
@@ -30,7 +29,7 @@ public class CategoryService {
         Page<Category> list = repository.findAll(pageRequest);
 
         // converte Ctegory para CategoryDTo
-        return list.map(x -> new CategoryDTO(x));
+        return list.map(CategoryDTO::new);
 
     }
 
