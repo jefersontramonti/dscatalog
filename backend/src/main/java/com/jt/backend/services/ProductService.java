@@ -8,11 +8,9 @@ import com.jt.backend.repositories.CategoryRepository;
 import com.jt.backend.repositories.ProductRepository;
 import com.jt.backend.services.exceptions.DatabaseException;
 import com.jt.backend.services.exceptions.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,12 +23,12 @@ import java.util.Optional;
 public class ProductService {
 
     private final ProductRepository repository;
-    public ProductService(ProductRepository repository) {
+    public ProductService(ProductRepository repository, CategoryRepository categoryRepository) {
         this.repository = repository;
+        this.categoryRepository = categoryRepository;
     }
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     //Cria findAll para buscar todas as categorias paginadas
     @Transactional(readOnly = true)
